@@ -94,8 +94,8 @@ function getUV(lat, lon) {
     } else {
     $("#uv-index").css("color", "green");
       
-      var cityHigh = response.daily[0].temp.max;
-      $("#high").text(`Expected high (F):${cityHigh}`);
+    var cityHigh = response.daily[0].temp.max;
+    $("#high").text(`Expected high (F):${cityHigh}`);
     $("#temp1").text(`Temp(F): ${response.daily[1].temp.max.toFixed(1)}`);
     $("#hum1").text(`Hum: ${response.daily[1].humidity}%`);
     var icon1 = response.daily[1].weather[0].icon;
@@ -119,3 +119,19 @@ function getUV(lat, lon) {
     $("#icon5").html(`<img src="http://openweathermap.org/img/wn/${icon5}@2x.png">`);
     }}
 )}
+
+function listCities() {
+  $("#cityList").text("");
+  cities.forEach((city) => {
+  $("#cityList").prepend(`<tr><td>${city}</td></tr>`);
+  });
+}
+listCities();
+
+$(document).on("click", "td", (event) => {
+  event.preventDefault();
+  var listedCity = $(e.target).text();
+  city = listedCity;
+  search();
+});
+
